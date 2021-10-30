@@ -37,11 +37,11 @@ examples and usage of using your application. For example:
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	TraverseChildren: true,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("root called")
+		fmt.Println("root get dsn: ", dsn)
 	},
 }
 
@@ -61,6 +61,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.firstappname.yaml)")
 
 	rootCmd.PersistentFlags().StringVar(&name, "name", "", "Set one name")
+	viper.BindPFlag("name", rootCmd.PersistentFlags().Lookup("name"))
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -68,6 +69,7 @@ func init() {
 }
 
 // initConfig reads in config file and ENV variables if set.
+// 初始化配置，cong config file 和 ENV 变量读取
 func initConfig() {
 	if cfgFile != "" {
 		// Use config file from the flag.

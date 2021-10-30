@@ -50,7 +50,9 @@ func init() {
 
 	// Here you will define your flags and configuration settings.
 
-	demoCmd.Flags().StringVarP(&dsn, "dsn", "d", "false", "dsn file")
+	demoCmd.Flags().StringVarP(&dsn, "dsn", "d", "", "dsn file")
+	// 给 dsn 设置为必选项
+	demoCmd.MarkFlagRequired("dsn")
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// demoCmd.PersistentFlags().String("foo", "", "A help for foo")
